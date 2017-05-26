@@ -1,4 +1,5 @@
 from flask import Flask, jsonify
+import requests
 
 
 app = Flask(__name__)
@@ -21,7 +22,16 @@ def hello_name(name):
 @app.route('/rate/<string:currency1>/to/<string:currency2>')
 def currency_rate(currency1, currency2):
 
-	rate = 0.768759
+	data = requests.get('http://www.apilayer.net/api/live?access_key=88b5656f48dc23632ce1e4ce7150bd63&currencies=USD,GBP,EUR&format=1').json()
+
+	rate = 0
+
+	if currency2.lower() == 'gbp':
+		rate = data['quotes']['USDGBP']
+	elif currency2.lower() == 'eur':
+		rate = data['quotes']['USDEUR']
+	elif currency2.lower() == 'usd':
+		rate = data['quotes']['USDUSD']
 
 	return jsonify(
 		{	
