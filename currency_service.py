@@ -31,7 +31,9 @@ class currency_service:
 		elif currency2.lower() == 'usd':
 			currency2_rate = data['quotes']['USDUSD']
 
-		if currency1_rate > currency2_rate:
-			return currency2_rate;
+		if currency1_rate < 1 and currency2_rate < 1:
+			return 1 / currency1_rate * currency2_rate
+		elif currency1_rate > currency2_rate:
+			return currency2_rate
 		else:
-			return 1 / currency1_rate;
+			return 1 / currency1_rate
