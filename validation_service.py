@@ -7,3 +7,9 @@ class validation_service:
 			return True
 		except ValueError:
 			return False
+
+	def currency_is_valid(currency):
+
+		if currency.lower() == 'usd' or currency.lower() == 'eur' or currency.lower() == 'gbp':
+			return True
+		return False

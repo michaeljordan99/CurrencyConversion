@@ -21,6 +21,9 @@ def hello_name(name):
 @app.route('/rate/<string:currency1>/to/<string:currency2>')
 def currency_rate(currency1, currency2):
 
+	if not validation_service.currency_is_valid(currency1) or not validation_service.currency_is_valid(currency2):
+		return jsonify({'error': 'Currency not supported'})
+
 	rate = currency_service.get_rate(currency1, currency2)
 
 	if rate == 0:
@@ -40,10 +43,10 @@ def currency_convert(currency1, amount, currency2):
 	if not validation_service.amount_is_valid(amount):
 		return jsonify({'error': 'Amount is not valid'})
 
-	rate = currency_service.get_rate(currency1, currency2)
+	if not validation_service.currency_is_valid(currency1) or not validation_service.currency_is_valid(currency2):
+		return jsonify({'error': 'Currency not supported'})
 
-	if rate == 0:
-		return jsonify({'error': 'Currency not found'})
+	rate = currency_service.get_rate(currency1, currency2)
 
 	converted_amount = round(amount * rate, 2)
 

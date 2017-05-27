@@ -11,29 +11,34 @@ class currency_service:
 
 	def get_rate(currency1, currency2):
 
-		rates = currency_service.get_rates()
+		try:
 
-		currency1_rate = 0
+			rates = currency_service.get_rates()
 
-		if currency1.lower() == 'gbp':
-			currency1_rate = rates['quotes']['USDGBP']
-		elif currency1.lower() == 'eur':
-			currency1_rate = rates['quotes']['USDEUR']
-		elif currency1.lower() == 'usd':
-			currency1_rate = rates['quotes']['USDUSD']
+			currency1_rate = 0
 
-		currency2_rate = 0
+			if currency1.lower() == 'gbp':
+				currency1_rate = rates['quotes']['USDGBP']
+			elif currency1.lower() == 'eur':
+				currency1_rate = rates['quotes']['USDEUR']
+			elif currency1.lower() == 'usd':
+				currency1_rate = rates['quotes']['USDUSD']
 
-		if currency2.lower() == 'gbp':
-			currency2_rate = rates['quotes']['USDGBP']
-		elif currency2.lower() == 'eur':
-			currency2_rate = rates['quotes']['USDEUR']
-		elif currency2.lower() == 'usd':
-			currency2_rate = rates['quotes']['USDUSD']
+			currency2_rate = 0
 
-		if currency1_rate < 1 and currency2_rate < 1:
-			return 1 / currency1_rate * currency2_rate
-		elif currency1_rate > currency2_rate:
-			return currency2_rate
-		else:
-			return 1 / currency1_rate
+			if currency2.lower() == 'gbp':
+				currency2_rate = rates['quotes']['USDGBP']
+			elif currency2.lower() == 'eur':
+				currency2_rate = rates['quotes']['USDEUR']
+			elif currency2.lower() == 'usd':
+				currency2_rate = rates['quotes']['USDUSD']
+
+			if currency1_rate < 1 and currency2_rate < 1:
+				return 1 / currency1_rate * currency2_rate
+			elif currency1_rate > currency2_rate:
+				return currency2_rate
+			else:
+				return 1 / currency1_rate
+
+		except ValueError:
+			return 0
