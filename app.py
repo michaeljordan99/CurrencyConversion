@@ -29,7 +29,9 @@ def currency_rate(currency1, currency2):
 	rate = currency_service.get_rate(currency1, currency2)
 
 	if rate == 0:
-		return jsonify({'error': 'Currency not found'})
+		response = jsonify({'error': 'Currency not found'})
+		response.status_code = 400
+		return response
 
 	response = jsonify(
 				{	
