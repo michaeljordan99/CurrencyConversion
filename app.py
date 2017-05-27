@@ -1,5 +1,4 @@
 from flask import Flask, jsonify
-import requests
 from currency_service import currency_service
 
 app = Flask(__name__)
