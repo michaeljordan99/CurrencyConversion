@@ -1,5 +1,6 @@
 from flask import Flask, jsonify
 from currency_service import currency_service
+from validation_service import validation_service
 
 app = Flask(__name__)
 
@@ -35,6 +36,9 @@ def currency_rate(currency1, currency2):
 # GET /convert/currency1/amount/to/currency2
 @app.route('/convert/<string:currency1>/<float:amount>/to/<string:currency2>')
 def currency_convert(currency1, amount, currency2):
+
+	if not validation_service.amount_is_valid(amount):
+		return jsonify({'error': 'Amount is not valid'})
 
 	rate = currency_service.get_rate(currency1, currency2)
 
