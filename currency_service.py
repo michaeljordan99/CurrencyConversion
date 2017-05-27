@@ -40,5 +40,5 @@ class currency_service:
 			else:
 				return 1 / currency1_rate
 
-		except ValueError:
+		except:
 			return 0

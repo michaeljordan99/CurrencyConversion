@@ -5,7 +5,7 @@ class validation_service:
 		try:
 			float(amount)
 			return True
-		except ValueError:
+		except:
 			return False
 
 	def currency_is_valid(currency):
