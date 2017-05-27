@@ -22,6 +22,9 @@ def currency_rate(currency1, currency2):
 
 	rate = currency_service.get_rate(currency1, currency2)
 
+	if rate == 0:
+		return jsonify({'error': 'Currency not found'})
+
 	return jsonify(
 		{	
 			'from': '{}'.format(currency1), 
@@ -34,6 +37,9 @@ def currency_rate(currency1, currency2):
 def currency_convert(currency1, amount, currency2):
 
 	rate = currency_service.get_rate(currency1, currency2)
+
+	if rate == 0:
+		return jsonify({'error': 'Currency not found'})
 
 	converted_amount = round(amount * rate, 2)
 
