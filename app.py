@@ -35,8 +35,8 @@ def currency_rate(currency1, currency2):
 
 	response = jsonify(
 				{	
-					'from': '{}'.format(currency1), 
-					'to': '{}'.format(currency2),
+					'from': currency1, 
+					'to': currency2,
 					'rate': rate
 				})
 
@@ -62,9 +62,9 @@ def currency_convert(currency1, amount, currency2):
 
 	response = jsonify(
 				{	
-					'from': '{}'.format(currency1), 
+					'from': currency1, 
 					'from_amount': '{:.2f}'.format(amount),
-					'to': '{}'.format(currency2),
+					'to': currency2,
 					'converted_amount': '{:.2f}'.format(converted_amount),
 					'rate': rate
 				})
